@@ -1,0 +1,687 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.body {
+    margin: 0;
+    height: 100%;
+}
+
+.container {
+  display: grid;
+  grid-template-areas: 
+        "bar-left header"
+        "bar-left chat"
+        "bar-left editor"; 
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 20% 1fr;
+  grid-gap: 0px;
+  height: 98vh;
+  margin: 0;
+  border: 1px solid black;
+}
+
+.chatwindow_header {
+  grid-area: header;
+  border: 1px solid black;
+  background: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.header_wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.chatcontent { 
+  grid-area: chat;      
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow-y: auto;
+  background-image: url("../img/bg.jpg");
+}
+
+.sidebarleft { 
+  grid-area: bar-left; 
+  border: 1px solid black;
+  background: white;
+  padding: 10px;
+}
+
+.sidebarright { 
+  grid-area: bar-right; 
+  background: grey;
+  visibility: none;
+  padding: 10px;
+}
+
+.header_left {
+    width: 30px;
+    height: 30px;
+    float: right;
+    position: relative;
+    z-index:2;
+    overflow: hidden;
+    margin-left: 5px;
+    margin-top: 5px;
+    z-index: 150;
+}
+
+.header_left span {
+  width: 30px;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #222222;
+  transition: all 0.5s;
+}
+
+.header_left span:nth-of-type(2) {
+top: calc(50% - 5px);
+}
+
+.header_left span:nth-of-type(3) {
+top: calc(50% + 5px);
+}
+
+.header_left_search {
+    flex-grow: 1;
+    border: 2px solid rgb(118, 118, 233);
+    height: 30px;
+    width: 90%;
+    border-radius: 30px;
+    margin-left: 10px;
+    
+}
+
+.header_right {
+    width: 30px;
+    height: 30px;
+    position: relative;
+	  z-index:2;
+	  overflow: hidden;
+    margin-right: 10px;
+    margin-top: 5px;
+    z-index: 150;
+}
+
+.header_right span {
+    width: 30px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #222222;
+    transition: all 0.5s;
+}
+
+.header_right span:nth-of-type(2) {
+	top: calc(50% - 5px);
+}
+
+.header_right span:nth-of-type(3) {
+	top: calc(50% + 5px);
+}
+
+.sidebarleff_header {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.header_left_search > i {
+  padding-left: 5px;
+}
+
+#search {
+  outline: none;
+  width: 100px;
+  margin-top: 5px;
+  margin-left: 4px;
+  border: none;
+  font-size: 15px;
+}
+/* Меню, которое будет появляться */
+.menuLeft {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20%;
+	height: 100%;
+	padding: 15px;
+  background: white;
+	transform: translateX(-100%);
+	transition: transform 0.5s; 
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.menuLeft.active {
+	transform: translateX(0);
+}
+/* Меняем гамбургер иконку, когда меню открыто */
+.header_left.active span:nth-of-type(1) {
+  display: none;
+}
+.header_left.active span:nth-of-type(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);  
+}
+.header_left.active span:nth-of-type(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg); 
+}
+.menuLeft_nav {
+  font-size: medium;
+  margin-top: 1px;
+}
+.menuLeft_nav li {
+	list-style-type: none;
+  margin-top: 5px;
+}
+
+.menuLeft_nav ul {
+  list-style: none;
+	margin: 5px;
+  padding: 0;
+}
+
+.menuLeft_nav a {
+  text-decoration: none;
+  color: black;
+}
+/* Меню, которое будет появляться */
+.menuRight {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 40%;
+	height: 100%;
+	padding: 15px;
+  background: white;
+	transform: translateX(100%);
+	transition: transform 0.5s; 
+  z-index: 100;
+}
+.menuRight.active {
+	transform: translateX(0);
+}
+
+.menuRight_nav {
+   float: right;
+}
+.menuRight_nav li {
+	list-style-type: none;
+}
+
+.menuRight_nav ul {
+  list-style: none;
+	margin: 5px;
+  padding: 0;
+}
+
+/* Меняем гамбургер иконку, когда меню открыто */
+.header_right.active span:nth-of-type(1) {
+  display: none;
+}
+.header_right.active span:nth-of-type(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);  
+}
+.header_right.active span:nth-of-type(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg); 
+}
+.menuRight_nav {
+  margin-top: 80px;
+}
+.overlay__shadow{
+  position: fixed;
+  border:none;
+  display: block;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  background-color: black;
+}
+/* активная подложка */
+.overlay__shadow--show{
+  pointer-events: auto;
+  opacity: 0.6;
+}
+
+.sidebarleft_body {
+  margin-top: 20px;
+  height: 94%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+.sidebarleft_body a:link, a:visited,a:hover,a:active,a:focus {
+  text-decoration: none;
+  color: black;
+}
+
+.header_avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.avatar {
+  display: inline-block;
+  position: relative;
+}
+
+.avatar > .status {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status[data-status=on] {
+  background-color: rgb(4, 247, 4);
+}
+.status[data-status=off] {
+  background-color: #c00;
+}
+.status[data-status=away] {
+  background-color: rgb(233, 229, 17);
+}
+
+.header_info {
+  font-style: italic;
+  cursor: pointer;
+}
+
+.header_owner {
+  font-weight: bolder;
+}
+
+.header_title {
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.sidebarleft_contact_chat {
+  margin: 0px;
+  padding: 5px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  cursor: pointer;
+}
+.sidebarleft_avatar {
+  width: 40px;
+  height: 40px;
+}
+.sidebarleft_title {
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+.sidebarleft_owner {
+  font-weight: bolder;
+}
+
+.sidebarleft_lastpost {
+  font-style: italic;
+}
+
+.chatcontent_mymessage_wrapper {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chatcontent_body {
+  background-color: white;
+  border-radius: 12px;
+  padding: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 60%;
+}
+
+.chatcontent_body--my {
+  background-color: #eeffde;
+}
+
+.chatcontent_mymessage {
+  justify-content: flex-end;
+}
+
+.chatcontent_yourmessage {
+  justify-content: flex-start;
+}
+
+.chatcontent_yourmessage_time {
+  float: right;
+  font-size: small;
+}
+
+.chatcontent_mymessage_time {
+  float: right;
+  font-size: small;
+}
+
+.myavatar-photo {
+  height: 150px;
+  width: 150px;
+  margin-top: 100px;
+  border-radius: 50%;
+}
+
+.myavatar {
+  display: inline-block;
+  position: relative;
+}
+
+.myavatar > .camera {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.camera {
+  text-decoration: none;
+  background-color: rgb(123, 255, 111);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+}
+
+.icon-camera {
+  padding-left: 12px;
+  padding-top: 12px;
+  color: black;
+}
+
+.mynick {
+  margin-top: 5px;
+}
+
+.mynick a {
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 50;
+  width: 150px;
+  border: 1px solid black;
+  background-color: white;
+}
+ 
+.context-menu--active {
+  display: block;
+}
+
+.dropdown-menu {
+  list-style: none;
+	margin: 5px;
+  padding: 0;
+}
+
+.context-menu__item {
+  list-style-type: none;
+}
+
+.context-menu__item a {
+  text-decoration: none;
+  color: black;
+}
+
+.context-menu2 {
+  display: none;
+  position: absolute;
+  z-index: 50;
+  width: 100px;
+  border: 1px solid black;
+  background-color: white;
+}
+ 
+.context-menu2--active {
+  display: block;
+}
+
+.chatwindow_editor {
+  grid-area: editor;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: center;
+  background-image: url("../img/bg.jpg");
+}
+
+.chatwindow_area {
+  border: 1px solid black;
+  border-radius: 20px;
+  background: white;
+  margin-top: 10px;
+  height: 42px;
+  width: 90%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+}
+
+.chatwindow_newMessageInput{
+  width: 90%;
+} 
+
+.chatwindow_newMessageArea {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.chatwindow_icon {
+  padding-top: 5px;
+}
+
+.chatwindow_newMessageInput {
+  font-size: medium;
+  border: none;
+  outline: none;
+}
+
+.chatwindow_control {
+  width: 100%;
+  height: 30px;
+  padding-top: 8px;
+  padding-left: 20px;
+  margin-left: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  flex-grow: 1;
+  box-shadow: 0 1px 2 px rgba(114, 114, 114, 0.25098);
+}
+
+.chatmessage_send {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color linear .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatmessage_send:hover {
+  background-color: rgb(160, 162, 180);
+}
+
+#configgroupchat::hover {
+  text-decoration: underline;
+}
+
+#configgroupchat {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.configChat {
+  display: flex;
+  border: 1px solid black;
+  position: fixed;
+	top: 100px;
+	right: 50px;
+	width: 80%;
+	height: 80%;
+  background: white;
+  z-index: 120;
+}
+
+.leftpanel {
+	width: 45%;
+	height: 100%;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+
+.trasfer {
+  width: 10%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.trasfer > i {
+ margin-top: 38vh;
+}
+
+.rightpanel {
+	width: 45%;
+	height: 100%;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+
+.header_left_search {
+  margin-top: 10px;
+}
+
+#search2 {
+  outline: none;
+  width: 100px;
+  margin-top: 5px;
+  margin-left: 4px;
+  border: none;
+  font-size: 15px;
+}
+
+.groupchat_header {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.layerEdit {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 800px;
+	height: 100px;
+	padding: 15px;
+  background: white;
+	transform: translateX(-100%);
+	transition: transform 0s; 
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.layerEdit.active {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.layerListChat {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 800px;
+	padding: 15px;
+  background: white;
+	transform: translateX(-100%);
+	transition: transform 0s; 
+  z-index: 155;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.layerListChat.active {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.panelForward {
+	width: 200px;
+	height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#search3 {
+  outline: none;
+  width: 100px;
+  margin-top: 5px;
+  margin-left: 4px;
+  border: none;
+  font-size: 15px;
+}
